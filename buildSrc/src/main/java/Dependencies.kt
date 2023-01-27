@@ -13,6 +13,10 @@ object Releases {
     const val version_name = "1.0"
 }
 
+object KotlinOptions {
+    const val jvmTarget = "1.8"
+}
+
 object Modules {
     const val app = ":app"
     const val rollDice = ":rollDice"
