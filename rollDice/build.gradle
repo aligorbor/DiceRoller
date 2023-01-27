@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'com.example.diceroller.utils'
-    compileSdk compile_sdk_version
+    compileSdkVersion Config.compile_sdk
 
     defaultConfig {
-        minSdk min_sdk_version
-        targetSdk compile_sdk_version
+        minSdkVersion Config.min_sdk
+        targetSdkVersion Config.target_sdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -22,19 +22,19 @@ android {
         }
     }
 
-    flavorDimensions "version"
+    flavorDimensions Flavors.dimension_version
     productFlavors {
         demo {
-            dimension "version"
+            dimension Flavors.dimension_version
         }
         full {
-            dimension "version"
+            dimension Flavors.dimension_version
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Config.java_version
+        targetCompatibility Config.java_version
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -42,8 +42,11 @@ android {
 }
 
 dependencies {
-    implementation project(':dice')
-    implementation libraries
-    testImplementation testLibraries
-    androidTestImplementation androidTestLibraries
+    implementation project(Modules.dice)
+    implementation Libraries.appcompat
+    implementation Libraries.constraint_layout
+
+    testImplementation TestLibraries.junit
+    androidTestImplementation AndroidTestLibraries.test_ext
+    androidTestImplementation AndroidTestLibraries.espresso
 }
