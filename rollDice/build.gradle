@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -24,9 +25,9 @@ android {
 
     flavorDimensions Flavors.dimension_version
     productFlavors {
-        demo {
-            dimension Flavors.dimension_version
-        }
+//        demo {
+//            dimension Flavors.dimension_version
+//        }
         full {
             dimension Flavors.dimension_version
         }
@@ -39,10 +40,32 @@ android {
     kotlinOptions {
         jvmTarget = KotlinOptions.jvmTarget
     }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.fullDebug
+                groupId 'com.example.diceroller.utils'
+                artifactId 'rollDice'
+                version = '1.0'
+            }
+        }
+    }
 }
 
 dependencies {
-    implementation project(Modules.dice)
+  //  implementation project(Modules.dice)
+    implementation ('com.example.diceroller.data:dice:1.0')
     implementation Libraries.appcompat
     implementation Libraries.constraint_layout
 

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -38,6 +39,29 @@ android {
     }
     kotlinOptions {
         jvmTarget = KotlinOptions.jvmTarget
+    }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+
+    }
+
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.fullDebug
+                groupId 'com.example.diceroller.data'
+                artifactId 'dice'
+                version = '1.0'
+            }
+        }
     }
 }
 

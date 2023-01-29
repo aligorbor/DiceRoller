@@ -41,7 +41,8 @@ android {
 }
 
 dependencies {
-    implementation project(Modules.rollDice)
+  //  implementation project(Modules.rollDice)
+    implementation ('com.example.diceroller.utils:rollDice:1.0')
     implementation Libraries.appcompat
     implementation Libraries.constraint_layout
 
