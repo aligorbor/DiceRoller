@@ -40,9 +40,14 @@ android {
     }
 }
 
+configurations {
+    // Initializes a placeholder for the  dependency configurations.
+    fullDebugImplementation {}
+    demoDebugImplementation {}
+}
 dependencies {
-  //  implementation project(Modules.rollDice)
-    implementation ('com.example.diceroller.utils:rollDice:1.0')
+    demoDebugImplementation project(Modules.rollDice)
+    fullDebugImplementation ('com.example.diceroller.utils:rollDice:1.0')
     implementation Libraries.appcompat
     implementation Libraries.constraint_layout
 

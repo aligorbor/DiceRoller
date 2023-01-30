@@ -25,9 +25,9 @@ android {
 
     flavorDimensions Flavors.dimension_version
     productFlavors {
-//        demo {
-//            dimension Flavors.dimension_version
-//        }
+        demo {
+            dimension Flavors.dimension_version
+        }
         full {
             dimension Flavors.dimension_version
         }
@@ -62,10 +62,14 @@ afterEvaluate {
         }
     }
 }
-
+configurations {
+    // Initializes a placeholder for the  dependency configurations.
+    fullDebugImplementation {}
+    demoDebugImplementation {}
+}
 dependencies {
-  //  implementation project(Modules.dice)
-    implementation ('com.example.diceroller.data:dice:1.0')
+    demoDebugImplementation project(Modules.dice)
+    fullDebugImplementation ('com.example.diceroller.data:dice:1.0')
     implementation Libraries.appcompat
     implementation Libraries.constraint_layout
 
